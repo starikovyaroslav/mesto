@@ -10,3 +10,10 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+@media screen and (max-width: 620px) {
+  .profile__add-button {
+    width: 100%;
+    max-width: 282px;
+  }
+}
