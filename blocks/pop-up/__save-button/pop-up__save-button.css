@@ -9,6 +9,12 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  border-radius: 2px;
+  transition: .3s linear;
+}
+
+.pop-up__save-button:hover {
+  opacity: .8;
 }
 
 @media screen and (max-width: 415px) {

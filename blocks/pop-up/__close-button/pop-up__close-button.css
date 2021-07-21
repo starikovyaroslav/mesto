@@ -10,7 +10,12 @@
   height: 32px;
   padding: 0;
   border: none;
-  cursor: pointer
+  cursor: pointer;
+  transition: .3s linear;
+}
+
+.pop-up__close-button:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 620px) {
