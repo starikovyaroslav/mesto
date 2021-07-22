@@ -14,3 +14,5 @@
 * Адаптивная верстка
 * Верстка по макету Figma
 * JS
+
+Ссылка на проект: https://starikovyaroslav.github.io/mesto/
