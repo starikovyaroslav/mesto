@@ -20,5 +20,6 @@
   .profile__add-button {
     width: 100%;
     max-width: 282px;
+    background-size: 16px;
   }
 }

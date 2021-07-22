@@ -79,10 +79,10 @@
 
     <div class="pop-up">
       <div class="pop-up__container">
-        <form class="pop-up__form">
+        <form class="pop-up__form" name="form">
           <h2 class="pop-up__title">Редактировать профиль</h2>
-          <input type="text" class="pop-up__input name" placeholder="Имя">
-          <input type="text" class="pop-up__input about" placeholder="О себе">
+          <input type="text" class="pop-up__input pop-up__input_name" placeholder="Имя" name="name">
+          <input type="text" class="pop-up__input pop-up__input_about" placeholder="О себе" name="about">
           <button type="submit" class="pop-up__save-button">Сохранить</button>
         </form>
         <button type="button" class="pop-up__close-button"></button>
@@ -90,6 +90,6 @@
     </div>
 
   </div>
-  <script src="./pages/script.js"></script>
+  <script src="./scripts/script.js"></script>
 </body>
 </html>

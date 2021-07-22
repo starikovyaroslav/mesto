@@ -1,5 +1,5 @@
 .page {
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;;
   background-color: #000;
   color: #FFF;
   min-width: 320px;
