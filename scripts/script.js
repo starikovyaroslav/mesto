@@ -1,10 +1,10 @@
-let popup = document.querySelector('.pop-up');
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.pop-up__close-button');
-let Name = document.querySelector('.profile__name');
-let About = document.querySelector('.profile__subtitle');
-let nameInput = document.querySelector('.pop-up__input_place_name');
-let jobInput = document.querySelector('.pop-up__input_place_about');
+const popup = document.querySelector('.pop-up');
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.pop-up__close-button');
+const Name = document.querySelector('.profile__name');
+const About = document.querySelector('.profile__subtitle');
+const nameInput = document.querySelector('.pop-up__input_place_name');
+const jobInput = document.querySelector('.pop-up__input_place_about');
 
 function open() {
   popup.classList.add('pop-up_opened');
@@ -29,3 +29,41 @@ function formSubmitHandler (evt) {
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+//Здесь подгружается 6 начальных карточек
+const elements = document.querySelector('.elements');
+const template = document.querySelector('#element-template').content;
+
+for (let i = 0; i < initialCards.length; i++) {
+  const element = template.querySelector('.element').cloneNode(true);
+  element.querySelector('.element__image').src = initialCards[i].link;
+  element.querySelector('.element__title').textContent = initialCards[i].name;
+  elements.append(element);
+}
