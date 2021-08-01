@@ -1,14 +1,14 @@
 const popup = document.querySelector('.pop-up');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.pop-up__close-button');
-const Name = document.querySelector('.profile__name');
-const About = document.querySelector('.profile__subtitle');
+let name = document.querySelector('.profile__name');
+let About = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.pop-up__input_place_name');
 const jobInput = document.querySelector('.pop-up__input_place_about');
 
 function open() {
   popup.classList.add('pop-up_opened');
-  nameInput.value = Name.textContent;
+  nameInput.value = name.textContent;
   jobInput.value = About.textContent;
 }
 
@@ -19,11 +19,11 @@ function close() {
 editButton.addEventListener('click', open);
 closeButton.addEventListener('click', close);
 
-let formElement = document.querySelector('.pop-up__form');
+const formElement = document.querySelector('.pop-up__form');
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  Name.textContent = nameInput.value;
+  name.textContent = nameInput.value;
   About.textContent = jobInput.value;
   close();
 }
@@ -67,3 +67,40 @@ for (let i = 0; i < initialCards.length; i++) {
   element.querySelector('.element__title').textContent = initialCards[i].name;
   elements.append(element);
 }
+
+
+//Попап добавления карточки
+const addButton = document.querySelector('.profile__add-button');
+const popupAdd = document.querySelector('.pop-up_add-card');
+const closeButtonAdd = document.querySelector('.pop-up__close-button_add-card');
+
+function openAddCard() {
+  popupAdd.classList.add('pop-up_opened');
+}
+
+function closeAddCard() {
+  popupAdd.classList.remove('pop-up_opened');
+}
+
+addButton.addEventListener('click', openAddCard);
+closeButtonAdd.addEventListener('click', closeAddCard);
+
+//Функция добавления карточки
+const linkInput = document.querySelector('.pop-up__input_place_link');
+const addNameInput = popupAdd.querySelector('.pop-up__input_place_name');
+let formElementAdd = popupAdd.querySelector('.pop-up__form');
+console.log(formElementAdd);
+function addCard() {
+  element = template.querySelector('.element').cloneNode(true);
+  element.querySelector('.element__image').src = linkInput.value;
+  element.querySelector('.element__title').textContent = addNameInput.value;
+  elements.prepend(element);
+}
+
+function addformSubmitHandler (evt) {
+  evt.preventDefault();
+  addCard();
+  closeAddCard();
+}
+
+formElementAdd.addEventListener('submit', addformSubmitHandler);
