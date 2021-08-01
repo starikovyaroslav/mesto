@@ -26,50 +26,7 @@
       </section>
 
       <section class="gallery">
-        <ul class="elements">
-          <li class="element">
-            <img src="./images/element-altay.jpg" alt="Алтай" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Алтай</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/element-baikal.jpg" alt="Байкал" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Байкал</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/element-dombay.jpg" alt="Домбай" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Домбай</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/element-elbrus.jpg" alt="Эльбрус" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Эльбрус</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/element-karachaevsk.jpg" alt="Карачаевск" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Карачаево-Черкесия</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/element-baikal.jpg" alt="Байкал" class="element__image">
-            <div class="element__container">
-              <h2 class="element__title">Байкал</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="elements"></ul>
       </section>
     </main>
 
@@ -77,19 +34,41 @@
       <p class="footer__subtitle">© 2021 Mesto Russia</p>
     </footer>
 
-    <div class="pop-up">
+    <div class="pop-up popup_edit-profile">
       <div class="pop-up__container">
-        <form class="pop-up__form">
+        <form class="pop-up__form" name="form">
           <h2 class="pop-up__title">Редактировать профиль</h2>
-          <input type="text" class="pop-up__input name" placeholder="Имя">
-          <input type="text" class="pop-up__input about" placeholder="О себе">
+          <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Имя" name="name">
+          <input type="text" class="pop-up__input pop-up__input_place_about" placeholder="О себе" name="about">
           <button type="submit" class="pop-up__save-button">Сохранить</button>
         </form>
         <button type="button" class="pop-up__close-button"></button>
       </div>
     </div>
 
+    <div class="pop-up pop-up_add-card">
+      <div class="pop-up__container">
+        <form class="pop-up__form" name="form">
+          <h2 class="pop-up__title">Новое место</h2>
+          <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Название" name="name">
+          <input type="text" class="pop-up__input pop-up__input_place_link" placeholder="Ссылка на картинку" name="link">
+          <button type="submit" class="pop-up__save-button">Сохранить</button>
+        </form>
+        <button type="button" class="pop-up__close-button pop-up__close-button_add-card"></button>
+      </div>
+    </div>
   </div>
-  <script src="./pages/script.js"></script>
+
+  <template id="element-template">
+    <li class="element">
+      <img src="#" alt="#" class="element__image">
+      <div class="element__container">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like-button"></button>
+      </div>
+    </li>
+  </template>
+
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
