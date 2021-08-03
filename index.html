@@ -6,61 +6,60 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
-  <div class="page">
-    <header class="header">
-      <img src="./images/header-logo.svg" alt="Лого" class="header__logo">
-    </header>
+<body class="page">
+  <header class="header">
+    <img src="./images/header-logo.svg" alt="Лого" class="header__logo">
+  </header>
 
-    <main class="content">
-      <section class="profile">
-        <img src="./images/profile-avatar.jpg" alt="Аватар" class="profile__avatar">
-        <div class="profile__info">
-          <div class="profile__container">
-            <h1 class="profile__name">Стариков Ярослав</h1>
-            <button type="button" class="profile__edit-button"></button>
-          </div>
-          <p class="profile__subtitle">Изучаю Веб</p>
+  <main class="content">
+    <section class="profile">
+      <img src="./images/profile-avatar.jpg" alt="Аватар" class="profile__avatar">
+      <div class="profile__info">
+        <div class="profile__container">
+          <h1 class="profile__name">Стариков Ярослав</h1>
+          <button type="button" class="profile__edit-button"></button>
         </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
-
-      <section class="gallery">
-        <ul class="elements"></ul>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p class="footer__subtitle">© 2021 Mesto Russia</p>
-    </footer>
-
-    <div class="pop-up popup_edit-profile">
-      <div class="pop-up__container">
-        <form class="pop-up__form" name="form">
-          <h2 class="pop-up__title">Редактировать профиль</h2>
-          <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Имя" name="name">
-          <input type="text" class="pop-up__input pop-up__input_place_about" placeholder="О себе" name="about">
-          <button type="submit" class="pop-up__save-button">Сохранить</button>
-        </form>
-        <button type="button" class="pop-up__close-button"></button>
+        <p class="profile__subtitle">Изучаю Веб</p>
       </div>
+      <button type="button" class="profile__add-button"></button>
+    </section>
+
+    <section class="gallery">
+      <ul class="elements"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__subtitle">© 2021 Mesto Russia</p>
+  </footer>
+
+  <div class="pop-up popup_edit-profile">
+    <div class="pop-up__container">
+      <form class="pop-up__form" name="form">
+        <h2 class="pop-up__title">Редактировать профиль</h2>
+        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Имя" name="name">
+        <input type="text" class="pop-up__input pop-up__input_place_about" placeholder="О себе" name="about">
+        <button type="submit" class="pop-up__save-button">Сохранить</button>
+      </form>
+      <button type="button" class="pop-up__close-button"></button>
     </div>
+  </div>
 
-    <div class="pop-up pop-up_add-card">
-      <div class="pop-up__container">
-        <form class="pop-up__form" name="form">
-          <h2 class="pop-up__title">Новое место</h2>
-          <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Название" name="name">
-          <input type="text" class="pop-up__input pop-up__input_place_link" placeholder="Ссылка на картинку" name="link">
-          <button type="submit" class="pop-up__save-button">Сохранить</button>
-        </form>
-        <button type="button" class="pop-up__close-button pop-up__close-button_add-card"></button>
-      </div>
+  <div class="pop-up pop-up_add-card">
+    <div class="pop-up__container">
+      <form class="pop-up__form" name="form">
+        <h2 class="pop-up__title">Новое место</h2>
+        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Название" name="name">
+        <input type="text" class="pop-up__input pop-up__input_place_link" placeholder="Ссылка на картинку" name="link">
+        <button type="submit" class="pop-up__save-button">Сохранить</button>
+      </form>
+      <button type="button" class="pop-up__close-button pop-up__close-button_add-card"></button>
     </div>
   </div>
 
   <template id="element-template">
     <li class="element">
+      <button type="button" class="element__delete-button"></button>
       <img src="#" alt="#" class="element__image">
       <div class="element__container">
         <h2 class="element__title"></h2>
