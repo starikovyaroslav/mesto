@@ -5,7 +5,7 @@ let name = document.querySelector('.profile__name');
 let about = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.pop-up__input_place_name');
 const jobInput = document.querySelector('.pop-up__input_place_about');
-const popupEdit = document.querySelector('.popup_edit-profile');
+const popupEdit = document.querySelector('.popup-edit');
 
 function open(popup) {
   popup.classList.toggle('pop-up_opened');
@@ -60,7 +60,7 @@ const initialCards = [
 
 //Попап добавления карточки
 const addButton = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.pop-up_add-card');
+const popupAdd = document.querySelector('.popup-add');
 const closeButtonAdd = document.querySelector('.pop-up__close-button_add-card');
 
 //функция закрытия/открытия карточки
@@ -77,7 +77,7 @@ const likeCard = e => e.target.classList.toggle('element__like-button_active');
 const delCard = e => e.target.closest('.element').remove();
 
 
-const popupImage = document.querySelector('.pop-up_image');
+const popupImage = document.querySelector('.popup-image');
 const popupCapture = popupImage.querySelector('.pop-up__img');
 const popupSubtitle = popupImage.querySelector('.pop-up__subtitle');
 const closeButtonImage = document.querySelector('.pop-up__close-button_image');
