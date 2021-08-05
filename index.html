@@ -35,10 +35,10 @@
 
   <div class="pop-up popup-edit">
     <div class="pop-up__container">
-      <form class="pop-up__form" name="form">
+      <form class="pop-up__form" name="form-edit">
         <h2 class="pop-up__title">Редактировать профиль</h2>
-        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Имя" name="name">
-        <input type="text" class="pop-up__input pop-up__input_place_about" placeholder="О себе" name="about">
+        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Имя" name="profile-name" required>
+        <input type="text" class="pop-up__input pop-up__input_place_about" placeholder="О себе" name="about" required>
         <button type="submit" class="pop-up__save-button">Сохранить</button>
       </form>
       <button type="button" class="pop-up__close-button"></button>
@@ -47,10 +47,10 @@
 
   <div class="pop-up popup-add">
     <div class="pop-up__container">
-      <form class="pop-up__form" name="form">
+      <form class="pop-up__form" name="form-add">
         <h2 class="pop-up__title">Новое место</h2>
-        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Название" name="name">
-        <input type="text" class="pop-up__input pop-up__input_place_link" placeholder="Ссылка на картинку" name="link">
+        <input type="text" class="pop-up__input pop-up__input_place_name" placeholder="Название" name="place-name" required>
+        <input type="url" class="pop-up__input pop-up__input_place_link" placeholder="Ссылка на картинку" name="link" required>
         <button type="submit" class="pop-up__save-button">Сохранить</button>
       </form>
       <button type="button" class="pop-up__close-button pop-up__close-button_add-card"></button>
@@ -60,8 +60,8 @@
   <div class="pop-up popup-image">
     <div class="pop-up__image-container">
       <div>
-        <img src="#" alt="#" class="pop-up__img" name="image">
-        <p class="pop-up__subtitle" name="subtitle"></p>
+        <img src="#" alt="#" class="pop-up__img">
+        <p class="pop-up__subtitle"></p>
       </div>
       <button type="button" class="pop-up__close-button pop-up__close-button_image"></button>
     </div>
@@ -78,6 +78,7 @@
     </li>
   </template>
 
+  <script src="./scripts/initial-сards.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 </html>
