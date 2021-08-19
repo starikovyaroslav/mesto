@@ -84,6 +84,28 @@ function handleProfileFormSubmitAdd (evt) {
   formElementAdd.reset();
 }
 
+//Функция закрытия любых попапов при нажатии в любой свободной зоне и при нажатии ESC
+const closePopup = () => {
+  const allPopups = document.querySelectorAll('.pop-up');
+  allPopups.forEach((popup) => {
+
+    //слушатель для клавиши ESC
+    document.addEventListener('keydown', evt => {
+      if (evt.key === 'Escape') {
+        popup.classList.remove('pop-up_opened');
+      };
+    })
+
+    //слушатель для клика в любом месте кроме самого попапа
+    popup.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget && !evt.target.classList.contains('pop-up__close-button')) {
+        popup.classList.remove('pop-up_opened');
+      };
+    });
+  });
+}
+
+
 editButton.addEventListener('click', openEdit);
 closeButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
@@ -91,3 +113,4 @@ formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 closeButtonImage.addEventListener('click', openImage);
 addButton.addEventListener('click', toggleAddCard);
 closeButtonAdd.addEventListener('click', toggleAddCard);
+closePopup();
