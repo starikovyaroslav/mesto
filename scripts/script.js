@@ -19,26 +19,42 @@ const linkInput = document.querySelector('.pop-up__input_place_link');
 const addNameInput = popupAdd.querySelector('.pop-up__input_place_name');
 const formElementAdd = popupAdd.querySelector('.pop-up__form');
 
-function open(popup) {
-  popup.classList.toggle('pop-up_opened');
+function openPopup(popup) {
+  popup.classList.add('pop-up_opened');
+  document.addEventListener('keydown', escClose);
+}
+
+//Функция закрытия попапа при нажатии Escape
+const escClose = (evt) => {
+  const popupOpened = document.querySelector('.pop-up_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  };
+}
+
+//Функция закрытия попапа
+const closePopup = (popup) => {
+  popup.classList.remove('pop-up_opened');
 }
 
 const openEdit = () => {
-  open(popupEdit);
+  openPopup(popupEdit);
   nameInput.value = profileNameElement.textContent;
   jobInput.value = about.textContent;
+}
+
+const openAdd = () => {
+  openPopup(popupAdd);
+
+  //Функция сбрасывает форму при ее открытии, это решает проблему активной кнопки при повторном открытии
+  formElementAdd.reset();
 }
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   profileNameElement.textContent = nameInput.value;
   about.textContent = jobInput.value;
-  openEdit();
-}
-
-//функция закрытия/открытия карточки
-function toggleAddCard() {
-  open(popupAdd);
+  closePopup(popupEdit);
 }
 
 //Лайк карточки
@@ -46,9 +62,6 @@ const likeCard = e => e.target.classList.toggle('element__like-button_active');
 
 //удаление карточки
 const delCard = e => e.target.closest('.element').remove();
-
-//фунцкция открытия/закрытия картинки
-const openImage = () => open(popupImage);
 
 //Функция добавления карточки
 function addCard(item) {
@@ -64,7 +77,7 @@ function addCard(item) {
 
   //открытие картинки
   elementImage.addEventListener('click', function() {
-    openImage();
+    openPopup(popupImage);
     popupCapture.src = item.link;
     popupCapture.alt = item.name;
     popupSubtitle.textContent = item.name;
@@ -80,26 +93,19 @@ initialCards.forEach(function(item) {
 function handleProfileFormSubmitAdd (evt) {
   evt.preventDefault();
   elements.prepend(addCard({link: linkInput.value, name: addNameInput.value}));
-  toggleAddCard();
   formElementAdd.reset();
+  closePopup(popupAdd);
 }
 
 //Функция закрытия любых попапов при нажатии в любой свободной зоне и при нажатии ESC
-const closePopup = () => {
+const closePopups = () => {
   const allPopups = document.querySelectorAll('.pop-up');
   allPopups.forEach((popup) => {
 
-    //слушатель для клавиши ESC
-    document.addEventListener('keydown', evt => {
-      if (evt.key === 'Escape') {
-        popup.classList.remove('pop-up_opened');
-      };
-    })
-
     //слушатель для клика в любом месте кроме самого попапа
     popup.addEventListener('click', (evt) => {
-      if (evt.target === evt.currentTarget && !evt.target.classList.contains('pop-up__close-button')) {
-        popup.classList.remove('pop-up_opened');
+      if (evt.target === evt.currentTarget || evt.target.classList.contains('pop-up__close-button')) {
+        closePopup(popup);
       };
     });
   });
@@ -107,10 +113,7 @@ const closePopup = () => {
 
 
 editButton.addEventListener('click', openEdit);
-closeButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
-closeButtonImage.addEventListener('click', openImage);
-addButton.addEventListener('click', toggleAddCard);
-closeButtonAdd.addEventListener('click', toggleAddCard);
-closePopup();
+addButton.addEventListener('click', openAdd);
+closePopups();
