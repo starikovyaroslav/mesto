@@ -35,6 +35,7 @@ const escClose = (evt) => {
 //Функция закрытия попапа
 const closePopup = (popup) => {
   popup.classList.remove('pop-up_opened');
+  document.removeEventListener('keydown', escClose);
 }
 
 const openEdit = () => {
