@@ -1,3 +1,6 @@
+import { Card } from "./Card.js";
+import { initialCards } from "./initial-сards.js";
+
 const popupEdit = document.querySelector('.popup-edit');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = popupEdit.querySelector('.pop-up__close-button');
@@ -58,42 +61,9 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupEdit);
 }
 
-//Лайк карточки
-const likeCard = e => e.target.classList.toggle('element__like-button_active');
-
-//удаление карточки
-const delCard = e => e.target.closest('.element').remove();
-
-//Функция добавления карточки
-function addCard(item) {
-  const element = template.querySelector('.element').cloneNode(true);
-  const likeButton = element.querySelector('.element__like-button');
-  const delButton = element.querySelector('.element__delete-button');
-  const elementImage = element.querySelector('.element__image');
-  elementImage.src = item.link;
-  elementImage.alt = item.name;
-  element.querySelector('.element__title').textContent = item.name;
-  likeButton.addEventListener('click', likeCard);
-  delButton.addEventListener('click', delCard);
-
-  //открытие картинки
-  elementImage.addEventListener('click', function() {
-    openPopup(popupImage);
-    popupCapture.src = item.link;
-    popupCapture.alt = item.name;
-    popupSubtitle.textContent = item.name;
-  });
-  return element;
-}
-
-//Здесь подгружается 6 начальных карточек
-initialCards.forEach(function(item) {
-  elements.append(addCard(item));
-});
-
 function handleProfileFormSubmitAdd (evt) {
   evt.preventDefault();
-  elements.prepend(addCard({link: linkInput.value, name: addNameInput.value}));
+  elements.prepend(makeCard({link: linkInput.value, name: addNameInput.value}));
   formElementAdd.reset();
   closePopup(popupAdd);
 }
@@ -112,6 +82,14 @@ const closePopups = () => {
   });
 }
 
+//Создание карточки
+const makeCard = (data) => {
+  return new Card(data, '#element-template').addCard();
+}
+
+initialCards.forEach(function(item) {
+  elements.append(makeCard(item));
+});
 
 editButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
