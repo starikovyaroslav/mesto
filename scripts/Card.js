@@ -1,7 +1,8 @@
 export class Card {
-  constructor(card, template){
+  constructor(card, template, openImage){
     this._card = card;
     this._template = template;
+    this._openImage = openImage;
 }
 
   addCard = () => {
@@ -10,6 +11,7 @@ export class Card {
     .content
     .querySelector('.element')
     .cloneNode(true);
+
 
     this._element = element;
     this._elementImage = this._element.querySelector('.element__image');
@@ -25,14 +27,10 @@ export class Card {
 
     return this._element;
   }
-    /* _elementImage.addEventListener('click', function() {
-      openPopup(popupImage);
-      popupCapture.src = this._card.link;
-      popupCapture.alt = this._card.name;
-      popupSubtitle.textContent = this._card.name;
-    });
-     */
+
   _setEventListeners = () => {
+
+
     this._likeButton.addEventListener('click', this._likeCard);
     this._delButton.addEventListener('click', this._delCard);
     this._elementImage.addEventListener('click', this._openImage);

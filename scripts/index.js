@@ -82,9 +82,17 @@ const closePopups = () => {
   });
 }
 
+const openImage = (e) => {
+  openPopup(popupImage);
+  popupCapture.src = e.target.getAttribute("src");
+  popupCapture.alt = e.target.getAttribute("alt");
+  popupSubtitle.textContent = e.target.getAttribute("alt");
+}
+
+
 //Создание карточки
 const makeCard = (data) => {
-  return new Card(data, '#element-template').addCard();
+  return new Card(data, '#element-template', openImage).addCard();
 }
 
 initialCards.forEach(function(item) {
