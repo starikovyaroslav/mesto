@@ -1,5 +1,6 @@
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-сards.js";
+import { FormValidator } from "./FormValidator.js";
 
 const popupEdit = document.querySelector('.popup-edit');
 const editButton = document.querySelector('.profile__edit-button');
@@ -21,6 +22,15 @@ const template = document.querySelector('#element-template').content;
 const linkInput = document.querySelector('.pop-up__input_place_link');
 const addNameInput = popupAdd.querySelector('.pop-up__input_place_name');
 const formElementAdd = popupAdd.querySelector('.pop-up__form');
+
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'pop-up__submit-button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
 
 function openPopup(popup) {
   popup.classList.add('pop-up_opened');
@@ -89,7 +99,6 @@ const openImage = (e) => {
   popupSubtitle.textContent = e.target.getAttribute("alt");
 }
 
-
 //Создание карточки
 const makeCard = (data) => {
   return new Card(data, '#element-template', openImage).addCard();
@@ -98,6 +107,10 @@ const makeCard = (data) => {
 initialCards.forEach(function(item) {
   elements.append(makeCard(item));
 });
+
+//Запуск валидации
+const formValidator = new FormValidator(config);
+formValidator.enableValidation();
 
 editButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
