@@ -5,7 +5,7 @@ export class Card {
     this._openImage = openImage;
 }
 
-  addCard = () => {
+createCard = () => {
     const element = document
     .querySelector(this._template)
     .content
@@ -38,5 +38,7 @@ export class Card {
 
   _likeCard = e => e.target.classList.toggle('element__like-button_active');
 
-  _delCard = e => e.target.closest('.element').remove();
+  _delCard = () => {
+    this._element.remove();
+  }
 }

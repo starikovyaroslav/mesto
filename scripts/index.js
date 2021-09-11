@@ -23,6 +23,10 @@ const linkInput = document.querySelector('.pop-up__input_place_link');
 const addNameInput = popupAdd.querySelector('.pop-up__input_place_name');
 const formElementAdd = popupAdd.querySelector('.pop-up__form');
 
+const formEditProfile = popupEdit.querySelector('.form');
+const formAddCard = popupAdd.querySelector('.form');
+
+
 const config = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -55,13 +59,15 @@ const openEdit = () => {
   openPopup(popupEdit);
   nameInput.value = profileNameElement.textContent;
   jobInput.value = about.textContent;
+  EditProfileformValidator.resetPopupValidationState();
 }
 
 const openAdd = () => {
   openPopup(popupAdd);
 
   //Функция сбрасывает форму при ее открытии, это решает проблему активной кнопки при повторном открытии
-  formElementAdd.reset();
+  formAddCard.reset();
+  AddCardformValidator.resetPopupValidationState();
 }
 
 function handleProfileFormSubmit (evt) {
@@ -79,7 +85,7 @@ function handleProfileFormSubmitAdd (evt) {
 }
 
 //Функция закрытия любых попапов при нажатии в любой свободной зоне и при нажатии ESC
-const closePopups = () => {
+const setClosePopupsListener = () => {
   const allPopups = document.querySelectorAll('.pop-up');
   allPopups.forEach((popup) => {
 
@@ -101,19 +107,23 @@ const openImage = (e) => {
 
 //Создание карточки
 const makeCard = (data) => {
-  return new Card(data, '#element-template', openImage).addCard();
+  return new Card(data, '#element-template', openImage).createCard();
 }
 
 initialCards.forEach(function(item) {
   elements.append(makeCard(item));
 });
 
-//Запуск валидации
-const formValidator = new FormValidator(config);
-formValidator.enableValidation();
+//Экземпляр валидации для формы редактиварония профиля
+const EditProfileformValidator = new FormValidator(formEditProfile, config);
+EditProfileformValidator.enableValidation()
+
+//Экземпляр валидации для формы создания карточки
+const AddCardformValidator = new FormValidator(formAddCard, config);
+AddCardformValidator.enableValidation()
 
 editButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 addButton.addEventListener('click', openAdd);
-closePopups();
+setClosePopupsListener();

@@ -3,3 +3,7 @@
   object-fit: cover;
   width: 100%;
 }
+
+.element__image:hover {
+  cursor: pointer;
+}
