@@ -59,7 +59,7 @@ const openEdit = () => {
   openPopup(popupEdit);
   nameInput.value = profileNameElement.textContent;
   jobInput.value = about.textContent;
-  EditProfileformValidator.resetPopupValidationState();
+  editProfileformValidator.resetPopupValidationState();
 }
 
 const openAdd = () => {
@@ -67,7 +67,7 @@ const openAdd = () => {
 
   //Функция сбрасывает форму при ее открытии, это решает проблему активной кнопки при повторном открытии
   formAddCard.reset();
-  AddCardformValidator.resetPopupValidationState();
+  addCardformValidator.resetPopupValidationState();
 }
 
 function handleProfileFormSubmit (evt) {
@@ -115,12 +115,12 @@ initialCards.forEach(function(item) {
 });
 
 //Экземпляр валидации для формы редактиварония профиля
-const EditProfileformValidator = new FormValidator(formEditProfile, config);
-EditProfileformValidator.enableValidation()
+const editProfileformValidator = new FormValidator(formEditProfile, config);
+editProfileformValidator.enableValidation()
 
 //Экземпляр валидации для формы создания карточки
-const AddCardformValidator = new FormValidator(formAddCard, config);
-AddCardformValidator.enableValidation()
+const addCardformValidator = new FormValidator(formAddCard, config);
+addCardformValidator.enableValidation()
 
 editButton.addEventListener('click', openEdit);
 formElementAdd.addEventListener('submit', handleProfileFormSubmitAdd);
