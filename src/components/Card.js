@@ -1,8 +1,8 @@
 export class Card {
-  constructor(card, template, openImage){
+  constructor(card, template, handleCardClick){
     this._card = card;
     this._template = template;
-    this._openImage = openImage;
+    this._openImage = handleCardClick;
 }
 
 createCard = () => {
