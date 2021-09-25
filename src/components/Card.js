@@ -12,7 +12,6 @@ createCard = () => {
     .querySelector('.element')
     .cloneNode(true);
 
-
     this._element = element;
     this._elementImage = this._element.querySelector('.element__image');
     this._likeButton = this._element.querySelector('.element__like-button');
@@ -29,8 +28,6 @@ createCard = () => {
   }
 
   _setEventListeners = () => {
-
-
     this._likeButton.addEventListener('click', this._likeCard);
     this._delButton.addEventListener('click', this._delCard);
     this._elementImage.addEventListener('click', this._openImage);
