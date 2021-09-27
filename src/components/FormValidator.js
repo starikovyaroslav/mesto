@@ -49,11 +49,11 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-          this._toggleButtonState(this._inputList, this._buttonElement);
+          this._toggleButtonState();
       });
     })
     this._formElement.addEventListener('reset', () => {
-      this._toggleButtonState(this._inputList, this._buttonElement);
+      this._toggleButtonState();
     });
   }
 
@@ -65,7 +65,7 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     })
-    this._toggleButtonState(this._inputList, this._buttonElement);
+    this._toggleButtonState();
   }
 }
 
