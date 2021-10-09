@@ -1,10 +1,10 @@
 export class Card {
-  constructor(card, template, { handleCardClick, delButtonClick, likeButtonClick }, myId){
+  constructor(card, template, { handleCardClick, delButtonClick, likeButtonClick }, id) {
     this._card = card;
     this._template = template;
     this._openImage = handleCardClick;
     this._id = card._id;
-    this._myId = myId;
+    this._myId = id;
     this._delButtonClick = delButtonClick;
     this._likeButtonClick = likeButtonClick;
 }
@@ -28,7 +28,16 @@ createCard = () => {
     this._elementImage.src = this._card.link;
     this._elementImage.alt = this._card.name;
     this._elementTitle.textContent = this._card.name;
-    /* this._likeCounter.textContent = this._card.likes.length; */
+    this._likeCounter.textContent = this._card.likes.length;
+
+    this._cardCheck();
+
+    this._card.likes.forEach(item => { // Эта функция делает кнопки лайка активными после ребута
+      if (item._id === this._myId) {
+        this._likeButton.classList.add('element__like-button_active');
+      }
+    });
+
     return this._element;
   }
 
@@ -48,8 +57,13 @@ createCard = () => {
     this._delButtonClick(this._id, this._element);
   }
 
-  likeHandler(likes) {
-/*     this._likeButton.classList.toggle('element__like-button_active'); */
+  likeHandler(likes) {//Подписывает лайки
     this._likeCounter.textContent = likes.length;
+  }
+
+  _cardCheck() { //Проверка карточки на принадлежность к id
+    if (this._myId !== this._card.owner._id) {
+      this._delButton.remove(); //если карточка не моя, убираем кнопку удаления
+    }
   }
 }

@@ -93,4 +93,16 @@ export default class Api {
     })
       .then(this._checkResponse)
   }
+
+  editAvatar(avatar){
+    return fetch(this._url +'/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(avatar)
+    })
+      .then(this._checkResponse)
+  }
 }

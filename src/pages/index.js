@@ -1,5 +1,5 @@
 import "./index.css";
-import { popupEdit, editButton, nameInput, jobInput, addButton, popupAdd, formEditProfile, formAddCard, config } from "../utils/constants.js"
+import { editButton, nameInput, jobInput, addButton, formEditProfile, formAddCard, formEditAvatar, profileAvatar, config } from "../utils/constants.js"
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -22,6 +22,7 @@ const userInfo = new UserInfo({ name: '.profile__name', about: '.profile__subtit
 const popupWithImage = new PopupWithImage('.popup-image');
 const popupEditForm = new PopupWithForm('.popup-edit', handleProfileFormSubmit);
 const popupAddForm = new PopupWithForm('.popup-add', handleProfileFormSubmitAdd);
+const popupAvatarForm = new PopupWithForm('.popup-avatar', handleFormSubmitAvatar);
 
 api.getUserInfo()
   .then(res => userInfo.setUserInfo(res.name, res.about, res.avatar, res._id))
@@ -33,6 +34,9 @@ const editProfileFormValidator = new FormValidator(formEditProfile, config);
 
 //Экземпляр валидации для формы создания карточки
 const addCardFormValidator = new FormValidator(formAddCard, config);
+
+//Экземпляр валидации для формы редактирования аватара
+const editAvatarFormValidator = new FormValidator(formEditAvatar , config);
 
 const editProfileOpen = () => {
   editProfileFormValidator.resetPopupValidationState();
@@ -96,22 +100,10 @@ const makeCard = (data) => {
           .catch(err => console.log(err))
       }
     }
-  });
+  }, userInfo.userId());
   const card = item.createCard();
   return card;
 }
-
-/* function likeButtonClick(likeButton, id) {
-  if (likeButton.classList.contains('element__like-button_active')){
-    api.deleteLike(id)
-      .then(res => card.likeHandler(res.likes))
-      .catch(err => console.log(err))
-  } else {
-    api.like(id)
-      .then(res => card.likeHandler(res.likes))
-      .catch(err => console.log(err))
-  }
-} */
 
 //Заполнение страницы дефолтными карточками
 const section = new Section({
@@ -127,16 +119,38 @@ api.getInitialCards()
 
 //Сабмит для попапа добавления карточки
 function handleProfileFormSubmitAdd({placeName, link}) {
-  const card = makeCard({name: placeName, link: link, alt: placeName});
-  section.addItem(card);
-  popupAddForm.close();
+  popupAddForm.renderLoading(true);
+  api.addCard({name: placeName, link: link})
+    .then(res => {
+      const card = makeCard(res);
+      section.addItem(card);
+      popupAddForm.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupAddForm.renderLoading(false))
 }
+
+//Функция изменения аватара
+function handleFormSubmitAvatar({avatar}) {
+  popupAvatarForm.renderLoading(true)
+  api.editAvatar({avatar: avatar})
+    .then(res => {
+      userInfo.setUserInfo(res);
+      popupAvatarForm.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupAvatarForm.renderLoading(false))
+}
+
 
 addButton.addEventListener('click', addOpen);
 editButton.addEventListener('click', editProfileOpen);
+profileAvatar.addEventListener('click', () => popupAvatarForm.open());
 editProfileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();
 popupEditForm.setEventListeners();
 popupAddForm.setEventListeners();
 popupWithImage.setEventListeners();
 popupDelete.setEventListeners();
+popupAvatarForm.setEventListeners()
