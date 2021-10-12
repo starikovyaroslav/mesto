@@ -1,5 +1,5 @@
 import "./index.css";
-import { editButton, nameInput, jobInput, addButton, formEditProfile, formAddCard, formEditAvatar, profileAvatar, config } from "../utils/constants.js"
+import { editButton, nameInput, jobInput, addButton, formEditProfile, formAddCard, formEditAvatar, profileAvatar, config, profilePhoto } from "../utils/constants.js"
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -18,15 +18,18 @@ const api = new Api({
   }
 });
 
-const userInfo = new UserInfo({ name: '.profile__name', about: '.profile__subtitle' });
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([resUserData, resCards]) => {
+    userInfo.setUserInfo(resUserData.name, resUserData.about, resUserData.avatar, resUserData._id);
+    section.renderItems(resCards);
+  })
+  .catch(err => console.log(err));
+
+const userInfo = new UserInfo({ name: '.profile__name', about: '.profile__subtitle', avatar: '.profile__avatar' });
 const popupWithImage = new PopupWithImage('.popup-image');
 const popupEditForm = new PopupWithForm('.popup-edit', handleProfileFormSubmit);
 const popupAddForm = new PopupWithForm('.popup-add', handleProfileFormSubmitAdd);
 const popupAvatarForm = new PopupWithForm('.popup-avatar', handleFormSubmitAvatar);
-
-api.getUserInfo()
-  .then(res => userInfo.setUserInfo(res.name, res.about, res.avatar, res._id))
-  .catch(err => console.log(err));
 
 
 //Экземпляр валидации для формы редактиварония профиля
@@ -55,7 +58,7 @@ function handleProfileFormSubmit({ name, about }) {
   popupEditForm.renderLoading(true); //активируется сообщение о сохранении
   api.setUserInfo({ name, about })
     .then(data => {
-      userInfo.setUserInfo(data);
+      userInfo.setUserInfo(data.name, data.about, data.avatar);
       popupEditForm.close();
     })
     .catch(err => {
@@ -89,8 +92,8 @@ const makeCard = (data) => {
     delButtonClick: (id, card) => {
       popupDelete.open(id, card);
     },
-    likeButtonClick: (likeButton, id) => {
-      if (likeButton.classList.contains('element__like-button_active')){
+    likeButtonClick: (id) => {
+      if (item.isLiked()){
         api.deleteLike(id)
           .then(res => item.likeHandler(res.likes))
           .catch(err => console.log(err))
@@ -113,9 +116,6 @@ const section = new Section({
   }
 }, '.elements');
 
-api.getInitialCards()
-  .then(res => section.renderItems(res))
-  .catch(err => console.log(err));
 
 //Сабмит для попапа добавления карточки
 function handleProfileFormSubmitAdd({placeName, link}) {
@@ -131,16 +131,17 @@ function handleProfileFormSubmitAdd({placeName, link}) {
 }
 
 //Функция изменения аватара
-function handleFormSubmitAvatar({avatar}) {
+function handleFormSubmitAvatar(link) {
   popupAvatarForm.renderLoading(true)
-  api.editAvatar({avatar: avatar})
+  api.editAvatar(link)
     .then(res => {
-      userInfo.setUserInfo(res);
+      userInfo.setUserInfo(res.name, res.about, res.avatar);
       popupAvatarForm.close();
     })
     .catch(err => console.log(err))
     .finally(() => popupAvatarForm.renderLoading(false))
 }
+
 
 
 addButton.addEventListener('click', addOpen);

@@ -48,7 +48,7 @@ createCard = () => {
   }
 
   _likeCard = e => {
-    this._likeButtonClick(e.target, this._id);
+    this._likeButtonClick(this._id);
     e.target.classList.toggle('element__like-button_active');
   }
 
@@ -65,5 +65,11 @@ createCard = () => {
     if (this._myId !== this._card.owner._id) {
       this._delButton.remove(); //если карточка не моя, убираем кнопку удаления
     }
+  }
+
+  isLiked() {
+    if (this._likeButton.classList.contains('element__like-button_active')) {
+      return true
+    } else return false
   }
 }

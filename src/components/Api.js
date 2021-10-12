@@ -14,9 +14,7 @@ export default class Api {
   getUserInfo() {
     return fetch(this._url + '/users/me', {
       method: 'GET',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b'
-      }
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -24,9 +22,7 @@ export default class Api {
   getInitialCards() {
     return fetch(this._url + '/cards', {
       method: 'GET',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b'
-      }
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -34,10 +30,7 @@ export default class Api {
   setUserInfo(data) {
     return fetch(this._url + '/users/me', {
       method: 'PATCH',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -49,10 +42,7 @@ export default class Api {
   addCard(data) {
     return fetch(this._url + '/cards', {
       method: 'POST',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -64,10 +54,7 @@ export default class Api {
   deleteCard(id) {
     return fetch(this._url + '/cards/likes/' + id, {
       method: 'DELETE',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      }
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -75,10 +62,7 @@ export default class Api {
   like(id) {
     return fetch(this._url + '/cards/likes/' + id, {
       method: 'PUT',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      }
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -86,22 +70,18 @@ export default class Api {
   deleteLike(id) {
     return fetch(this._url + '/cards/likes/' + id, {
       method: 'DELETE',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      }
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
 
-  editAvatar(avatar){
+  editAvatar(link){
     return fetch(this._url +'/users/me/avatar', {
       method: 'PATCH',
-      headers: {
-        authorization: 'd7e22a8b-edd0-4655-a36c-592649df720b',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(avatar)
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link.avatar
+      })
     })
       .then(this._checkResponse)
   }
